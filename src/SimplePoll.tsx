@@ -19,19 +19,21 @@ const options: Option[] = [
   {value: 'fortran', label: 'Fortran'},
 ];
 
-export default function SimplePoll() {
+export default function SimplePoll({ onSubmit }) {
   const [selectedValue, setSeletecValue] = useState<string>('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSeletecValue(event.target.value);
   }
 
+  const handleSubmit = () => {
+    if (selectedValue) {
+      onSubmit(true);
+    }
+  }
+
   return (
-    <Box
-      sx={{
-        border: 1
-      }}
-    >
+    <Box sx={{ border: 1 }}>
       <Box sx={{ padding: '1rem', borderBottom: 1 }}>
         <Typography variant="h6">
           What's the most popular programming language?
@@ -57,7 +59,7 @@ export default function SimplePoll() {
         </RadioGroup>
       </Box>
       <Box sx={{ padding: '1rem' }}>
-        <Button variant="contained">Submit</Button>
+        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
       </Box>
     </Box>
   );
